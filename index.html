@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="AutoCare Log - Track and manage your vehicle maintenance records">
+    <title>AutoCare Log - Vehicle Maintenance Tracker</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header role="banner" aria-label="Site header">
+        <h1>AutoCare Log</h1>
+        <nav role="navigation" aria-label="Main navigation">
+            <ul>
+                <li><a href="#home">Home</a></li>
+                <li><a href="#vehicles">Vehicles</a></li>
+                <li><a href="#maintenance">Maintenance</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main role="main" aria-label="Main content">
+        <section id="home" aria-labelledby="welcome-heading">
+            <h2 id="welcome-heading">Welcome to AutoCare Log</h2>
+            <p>Track and manage your vehicle maintenance records with ease.</p>
+        </section>
+
+        <section id="vehicles" aria-labelledby="vehicles-heading">
+            <h2 id="vehicles-heading">My Vehicles</h2>
+            <div id="vehicles-container" aria-live="polite" aria-atomic="true">
+                <!-- Vehicle list will be populated by JavaScript -->
+            </div>
+        </section>
+
+        <section id="maintenance" aria-labelledby="maintenance-heading">
+            <h2 id="maintenance-heading">Maintenance Records</h2>
+            <div id="maintenance-container" aria-live="polite" aria-atomic="true">
+                <!-- Maintenance records will be populated by JavaScript -->
+            </div>
+        </section>
+    </main>
+
+    <footer role="contentinfo" aria-label="Site footer">
+        <p>&copy; 2026 AutoCare Log. All rights reserved.</p>
+    </footer>
+
+    <script type="module" src="js/app.js"></script>
+</body>
+</html>
