@@ -727,3 +727,180 @@ input[type="number"].form-input::-webkit-outer-spin-button {
     background-size: 1.25rem 1.25rem;
     padding-right: calc(var(--space-3) + 2rem);
 }
+
+/* ===================================
+   Maintenance Form Styles
+   =================================== */
+
+/* Maintenance Form Wrapper */
+.maintenance-form-wrapper {
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+.maintenance-form {
+    width: 100%;
+}
+
+/* Textarea Styling */
+.form-textarea {
+    display: block;
+    width: 100%;
+    padding: var(--space-3);
+    font-size: var(--font-size-base);
+    font-family: var(--font-family-base);
+    color: var(--color-text-primary);
+    background-color: var(--color-background);
+    border: var(--border-width) solid var(--color-border);
+    border-radius: var(--border-radius-md);
+    transition: border-color var(--transition-fast), box-shadow var(--transition-fast);
+    resize: vertical;
+    min-height: 120px;
+}
+
+.form-textarea:focus {
+    outline: none;
+    border-color: var(--color-primary);
+    box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+}
+
+.form-textarea:disabled {
+    background-color: var(--color-surface);
+    color: var(--color-text-disabled);
+    cursor: not-allowed;
+    opacity: 0.6;
+}
+
+.form-textarea.is-valid {
+    border-color: var(--color-success);
+    background-color: rgba(16, 185, 129, 0.05);
+}
+
+.form-textarea.is-invalid {
+    border-color: var(--color-error);
+    background-color: rgba(239, 68, 68, 0.05);
+}
+
+/* Character Counter */
+.form-hint-group {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: var(--space-1);
+    gap: var(--space-2);
+}
+
+.character-counter {
+    font-size: var(--font-size-xs);
+    font-weight: var(--font-weight-medium);
+    color: var(--color-text-disabled);
+    white-space: nowrap;
+}
+
+/* Currency Input with Prefix */
+.input-with-prefix {
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+.input-prefix {
+    position: absolute;
+    left: var(--space-3);
+    color: var(--color-text-secondary);
+    font-weight: var(--font-weight-medium);
+    pointer-events: none;
+    z-index: 1;
+}
+
+.form-input.has-prefix {
+    padding-left: calc(var(--space-3) + 1rem);
+}
+
+/* Select Dropdown Styling */
+.form-select {
+    display: block;
+    width: 100%;
+    padding: var(--space-3);
+    font-size: var(--font-size-base);
+    color: var(--color-text-primary);
+    background-color: var(--color-background);
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20' fill='%2364748b'%3E%3Cpath fill-rule='evenodd' d='M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z' clip-rule='evenodd'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right var(--space-3) center;
+    background-size: 1.25rem 1.25rem;
+    border: var(--border-width) solid var(--color-border);
+    border-radius: var(--border-radius-md);
+    transition: border-color var(--transition-fast), box-shadow var(--transition-fast);
+    appearance: none;
+    cursor: pointer;
+    padding-right: calc(var(--space-3) + 2rem);
+}
+
+.form-select:focus {
+    outline: none;
+    border-color: var(--color-primary);
+    box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+}
+
+.form-select:disabled {
+    background-color: var(--color-surface);
+    color: var(--color-text-disabled);
+    cursor: not-allowed;
+    opacity: 0.6;
+}
+
+.form-select.is-valid {
+    border-color: var(--color-success);
+    background-color: rgba(16, 185, 129, 0.05);
+}
+
+.form-select.is-invalid {
+    border-color: var(--color-error);
+    background-color: rgba(239, 68, 68, 0.05);
+}
+
+/* Date Input Styling */
+input[type="date"].form-input {
+    position: relative;
+}
+
+input[type="date"].form-input::-webkit-calendar-picker-indicator {
+    cursor: pointer;
+    opacity: 0.6;
+    transition: opacity var(--transition-fast);
+}
+
+input[type="date"].form-input::-webkit-calendar-picker-indicator:hover {
+    opacity: 1;
+}
+
+/* Responsive Maintenance Form */
+@media (min-width: 768px) {
+    .maintenance-form-wrapper {
+        max-width: 700px;
+    }
+
+    .form-textarea {
+        min-height: 150px;
+    }
+}
+
+/* Accessibility - Focus Visible States */
+.form-textarea:focus-visible,
+.form-select:focus-visible {
+    outline: 2px solid var(--color-primary);
+    outline-offset: 2px;
+}
+
+/* High Contrast Mode Support */
+@media (prefers-contrast: high) {
+    .form-select,
+    .form-textarea {
+        border-width: var(--border-width-thick);
+    }
+
+    .character-counter {
+        font-weight: var(--font-weight-bold);
+    }
+}
