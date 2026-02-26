@@ -375,3 +375,172 @@ export function clearFormError(formElement) {
         existingError.remove();
     }
 }
+
+/**
+ * Validate maintenance date field
+ * @param {string} date - Date string
+ * @returns {Object} Validation result with valid flag and message
+ */
+export function validateDate(date) {
+    if (!date || typeof date !== 'string' || date.trim() === '') {
+        return {
+            valid: false,
+            field: 'date',
+            message: 'Service date is required'
+        };
+    }
+
+    const dateObj = new Date(date);
+    if (isNaN(dateObj.getTime())) {
+        return {
+            valid: false,
+            field: 'date',
+            message: 'Service date must be a valid date'
+        };
+    }
+
+    // Check if date is not in the future (with 1 day buffer for timezone differences)
+    const tomorrow = new Date();
+    tomorrow.setDate(tomorrow.getDate() + 1);
+    tomorrow.setHours(23, 59, 59, 999);
+
+    if (dateObj > tomorrow) {
+        return {
+            valid: false,
+            field: 'date',
+            message: 'Service date cannot be in the future'
+        };
+    }
+
+    // Check if date is not too far in the past (100 years)
+    const minDate = new Date();
+    minDate.setFullYear(minDate.getFullYear() - 100);
+
+    if (dateObj < minDate) {
+        return {
+            valid: false,
+            field: 'date',
+            message: 'Service date is too far in the past'
+        };
+    }
+
+    return { valid: true, field: 'date' };
+}
+
+/**
+ * Validate maintenance service type field
+ * @param {string} serviceType - Service type value
+ * @returns {Object} Validation result with valid flag and message
+ */
+export function validateServiceType(serviceType) {
+    if (!serviceType || typeof serviceType !== 'string') {
+        return {
+            valid: false,
+            field: 'serviceType',
+            message: 'Service type is required'
+        };
+    }
+
+    const trimmedServiceType = serviceType.trim();
+    if (trimmedServiceType.length === 0) {
+        return {
+            valid: false,
+            field: 'serviceType',
+            message: 'Service type cannot be empty'
+        };
+    }
+
+    if (trimmedServiceType.length > 100) {
+        return {
+            valid: false,
+            field: 'serviceType',
+            message: 'Service type must be 100 characters or less'
+        };
+    }
+
+    return { valid: true, field: 'serviceType' };
+}
+
+/**
+ * Validate maintenance description field
+ * @param {string} description - Description value
+ * @returns {Object} Validation result with valid flag and message
+ */
+export function validateDescription(description) {
+    // Description is optional, but if provided must meet constraints
+    if (description === null || description === undefined) {
+        return { valid: true, field: 'description' };
+    }
+
+    if (typeof description !== 'string') {
+        return {
+            valid: false,
+            field: 'description',
+            message: 'Description must be a string'
+        };
+    }
+
+    const maxLength = 5000;
+    if (description.length > maxLength) {
+        return {
+            valid: false,
+            field: 'description',
+            message: `Description must be ${maxLength} characters or less`
+        };
+    }
+
+    return { valid: true, field: 'description' };
+}
+
+/**
+ * Validate maintenance cost field
+ * @param {number|string} cost - Cost value
+ * @returns {Object} Validation result with valid flag and message
+ */
+export function validateCost(cost) {
+    if (cost === null || cost === undefined || cost === '') {
+        return {
+            valid: false,
+            field: 'cost',
+            message: 'Cost is required'
+        };
+    }
+
+    const costNum = Number(cost);
+    if (isNaN(costNum)) {
+        return {
+            valid: false,
+            field: 'cost',
+            message: 'Cost must be a valid number'
+        };
+    }
+
+    if (costNum < 0) {
+        return {
+            valid: false,
+            field: 'cost',
+            message: 'Cost cannot be negative'
+        };
+    }
+
+    if (costNum > 1000000) {
+        return {
+            valid: false,
+            field: 'cost',
+            message: 'Cost exceeds maximum allowed value'
+        };
+    }
+
+    // Check decimal precision (max 2 decimal places)
+    const costStr = String(cost);
+    const decimalPart = costStr.split('.')[1];
+    if (decimalPart && decimalPart.length > 2) {
+        return {
+            valid: false,
+            field: 'cost',
+            message: 'Cost can have at most 2 decimal places'
+        };
+    }
+
+    return { valid: true, field: 'cost' };
+}

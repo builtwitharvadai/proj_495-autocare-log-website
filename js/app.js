@@ -217,6 +217,10 @@ class Application {
             await this.initializeVehicleForm();
             Logger.info('Vehicle form component initialized');
 
+            // Initialize maintenance form component
+            await this.initializeMaintenanceForm();
+            Logger.info('Maintenance form component initialized');
+
         } catch (error) {
             this.errorHandler.handleError(error, {
                 action: 'initializeModules'
@@ -277,6 +281,13 @@ class Application {
             });
             window.dispatchEvent(event);
 
+            // Set the vehicle ID for maintenance form
+            const maintenanceForm = AppState.modules.get('maintenanceForm');
+            if (maintenanceForm && vehicleData.id) {
+                maintenanceForm.setVehicleId(vehicleData.id);
+                Logger.debug('Vehicle ID set for maintenance form', { vehicleId: vehicleData.id });
+            }
+
             // Future: Refresh vehicle list display
             // this.refreshVehiclesList();
 
@@ -284,6 +295,69 @@ class Application {
             this.errorHandler.handleError(error, {
                 action: 'handleVehicleSubmit',
                 vehicleData
+            });
+        }
+    }
+
+    /**
+     * Initialize maintenance form component
+     */
+    async initializeMaintenanceForm() {
+        try {
+            // Dynamic import of maintenance form component
+            const { createMaintenanceForm } = await import('./components/maintenanceForm.js');
+
+            // Create and initialize the maintenance form
+            const maintenanceForm = createMaintenanceForm('maintenance-form-container');
+
+            if (maintenanceForm && maintenanceForm.isInitialized) {
+                // Store in application state
+                AppState.modules.set('maintenanceForm', maintenanceForm);
+
+                // Setup callbacks for form events
+                maintenanceForm.onSubmit((maintenanceData) => {
+                    Logger.info('Maintenance form submitted successfully', { maintenanceData });
+                    // Handle maintenance record submission
+                    this.handleMaintenanceSubmit(maintenanceData);
+                });
+
+                maintenanceForm.onCancel(() => {
+                    Logger.info('Maintenance form cancelled');
+                });
+
+                Logger.debug('Maintenance form component ready');
+            } else {
+                Logger.warn('Maintenance form failed to initialize');
+            }
+        } catch (error) {
+            this.errorHandler.handleError(error, {
+                action: 'initializeMaintenanceForm'
+            });
+            throw error;
+        }
+    }
+
+    /**
+     * Handle maintenance form submission
+     * @param {Object} maintenanceData - Submitted maintenance data
+     */
+    handleMaintenanceSubmit(maintenanceData) {
+        try {
+            Logger.info('Processing maintenance submission', { maintenanceData });
+
+            // Dispatch custom event for other components to react
+            const event = new CustomEvent('maintenance:added', {
+                detail: { maintenance: maintenanceData }
+            });
+            window.dispatchEvent(event);
+
+            // Future: Refresh maintenance records display
+            // this.refreshMaintenanceList();
+
+        } catch (error) {
+            this.errorHandler.handleError(error, {
+                action: 'handleMaintenanceSubmit',
+                maintenanceData
             });
         }
     }
