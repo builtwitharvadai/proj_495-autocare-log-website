@@ -210,15 +210,82 @@ class Application {
      * Initialize application modules
      */
     async initializeModules() {
-        // This method will be used to initialize other modules as they are added
-        // For now, we just log that we're ready for module initialization
         Logger.info('Ready to initialize application modules');
 
-        // Future module initialization will happen here
-        // Example:
-        // await this.loadModule('storageService');
-        // await this.loadModule('dataManager');
-        // await this.loadModule('vehicleForm');
+        try {
+            // Initialize vehicle form component
+            await this.initializeVehicleForm();
+            Logger.info('Vehicle form component initialized');
+
+        } catch (error) {
+            this.errorHandler.handleError(error, {
+                action: 'initializeModules'
+            });
+            Logger.error('Error initializing modules', { error: error.message });
+        }
+    }
+
+    /**
+     * Initialize vehicle form component
+     */
+    async initializeVehicleForm() {
+        try {
+            // Dynamic import of vehicle form component
+            const { createVehicleForm } = await import('./components/vehicleForm.js');
+
+            // Create and initialize the vehicle form
+            const vehicleForm = createVehicleForm('vehicle-form-container');
+
+            if (vehicleForm && vehicleForm.isInitialized) {
+                // Store in application state
+                AppState.modules.set('vehicleForm', vehicleForm);
+
+                // Setup callbacks for form events
+                vehicleForm.onSubmit((vehicleData) => {
+                    Logger.info('Vehicle form submitted successfully', { vehicleData });
+                    // Refresh vehicle list or perform other actions
+                    this.handleVehicleSubmit(vehicleData);
+                });
+
+                vehicleForm.onCancel(() => {
+                    Logger.info('Vehicle form cancelled');
+                });
+
+                Logger.debug('Vehicle form component ready');
+            } else {
+                Logger.warn('Vehicle form failed to initialize');
+            }
+        } catch (error) {
+            this.errorHandler.handleError(error, {
+                action: 'initializeVehicleForm'
+            });
+            throw error;
+        }
+    }
+
+    /**
+     * Handle vehicle form submission
+     * @param {Object} vehicleData - Submitted vehicle data
+     */
+    handleVehicleSubmit(vehicleData) {
+        try {
+            Logger.info('Processing vehicle submission', { vehicleData });
+
+            // Dispatch custom event for other components to react
+            const event = new CustomEvent('vehicle:added', {
+                detail: { vehicle: vehicleData }
+            });
+            window.dispatchEvent(event);
+
+            // Future: Refresh vehicle list display
+            // this.refreshVehiclesList();
+
+        } catch (error) {
+            this.errorHandler.handleError(error, {
+                action: 'handleVehicleSubmit',
+                vehicleData
+            });
+        }
     }
 
     /**

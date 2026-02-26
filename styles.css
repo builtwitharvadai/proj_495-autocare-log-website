@@ -532,3 +532,198 @@ footer p {
 .p-4 {
     padding: var(--space-4);
 }
+
+/* ===================================
+   Vehicle Form Styles
+   =================================== */
+
+/* Form Container */
+.form-container {
+    background-color: var(--color-surface);
+    padding: var(--space-6);
+    border-radius: var(--border-radius-lg);
+    border: var(--border-width) solid var(--color-border);
+}
+
+.vehicle-form-wrapper {
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+.vehicle-form {
+    width: 100%;
+}
+
+/* Form Elements */
+.form-hint {
+    display: block;
+    margin-top: var(--space-1);
+    font-size: var(--font-size-xs);
+    color: var(--color-text-disabled);
+}
+
+.required {
+    color: var(--color-error);
+    font-weight: var(--font-weight-bold);
+}
+
+/* Validation States */
+.form-input.is-valid {
+    border-color: var(--color-success);
+    background-color: rgba(16, 185, 129, 0.05);
+}
+
+.form-input.is-invalid {
+    border-color: var(--color-error);
+    background-color: rgba(239, 68, 68, 0.05);
+}
+
+.form-input.is-valid:focus {
+    border-color: var(--color-success);
+    box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.1);
+}
+
+.form-input.is-invalid:focus {
+    border-color: var(--color-error);
+    box-shadow: 0 0 0 3px rgba(239, 68, 68, 0.1);
+}
+
+/* Error Messages */
+.error-message {
+    display: block;
+    margin-top: var(--space-2);
+    padding: var(--space-2) var(--space-3);
+    font-size: var(--font-size-sm);
+    color: var(--color-error);
+    background-color: rgba(239, 68, 68, 0.1);
+    border-left: 3px solid var(--color-error);
+    border-radius: var(--border-radius-sm);
+}
+
+.form-error-message {
+    display: block;
+    margin-bottom: var(--space-5);
+    padding: var(--space-3) var(--space-4);
+    font-size: var(--font-size-sm);
+    font-weight: var(--font-weight-medium);
+    color: var(--color-error);
+    background-color: rgba(239, 68, 68, 0.1);
+    border: var(--border-width) solid var(--color-error);
+    border-radius: var(--border-radius-md);
+}
+
+.success-message {
+    display: block;
+    margin-bottom: var(--space-5);
+    padding: var(--space-3) var(--space-4);
+    font-size: var(--font-size-sm);
+    font-weight: var(--font-weight-medium);
+    color: var(--color-success);
+    background-color: rgba(16, 185, 129, 0.1);
+    border: var(--border-width) solid var(--color-success);
+    border-radius: var(--border-radius-md);
+}
+
+/* Form Actions */
+.form-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-3);
+    margin-top: var(--space-6);
+    padding-top: var(--space-4);
+    border-top: var(--border-width) solid var(--color-border);
+}
+
+/* Button Variants */
+.btn-primary {
+    background-color: var(--color-primary);
+    color: var(--color-background);
+}
+
+.btn-primary:hover {
+    background-color: var(--color-primary-dark);
+}
+
+.btn-secondary {
+    background-color: var(--color-secondary);
+    color: var(--color-background);
+}
+
+.btn-secondary:hover {
+    background-color: var(--color-secondary-dark);
+}
+
+.btn-tertiary {
+    background-color: transparent;
+    color: var(--color-text-secondary);
+    border: var(--border-width) solid var(--color-border);
+    box-shadow: none;
+}
+
+.btn-tertiary:hover {
+    background-color: var(--color-surface);
+    color: var(--color-text-primary);
+    border-color: var(--color-secondary);
+}
+
+/* Responsive Form Layout */
+@media (min-width: 768px) {
+    .form-container {
+        padding: var(--space-8);
+    }
+
+    .form-actions {
+        justify-content: flex-start;
+    }
+
+    .form-actions .btn {
+        min-width: 120px;
+    }
+}
+
+/* Focus States for Accessibility */
+.form-input:focus,
+.form-select:focus,
+.form-textarea:focus {
+    outline: none;
+    border-color: var(--color-primary);
+    box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+}
+
+/* Disabled State */
+.form-input:disabled,
+.form-select:disabled,
+.form-textarea:disabled {
+    background-color: var(--color-surface);
+    color: var(--color-text-disabled);
+    cursor: not-allowed;
+    opacity: 0.6;
+}
+
+/* Number Input Styling */
+input[type="number"].form-input {
+    -moz-appearance: textfield;
+}
+
+input[type="number"].form-input::-webkit-inner-spin-button,
+input[type="number"].form-input::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+/* Validation Icon Indicators */
+.form-input.is-valid {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20' fill='%2310b981'%3E%3Cpath fill-rule='evenodd' d='M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z' clip-rule='evenodd'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right var(--space-3) center;
+    background-size: 1.25rem 1.25rem;
+    padding-right: calc(var(--space-3) + 2rem);
+}
+
+.form-input.is-invalid {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20' fill='%23ef4444'%3E%3Cpath fill-rule='evenodd' d='M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z' clip-rule='evenodd'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right var(--space-3) center;
+    background-size: 1.25rem 1.25rem;
+    padding-right: calc(var(--space-3) + 2rem);
+}
