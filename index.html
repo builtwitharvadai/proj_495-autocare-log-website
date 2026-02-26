@@ -9,39 +9,52 @@
 </head>
 <body>
     <header role="banner" aria-label="Site header">
-        <h1>AutoCare Log</h1>
-        <nav role="navigation" aria-label="Main navigation">
-            <ul>
-                <li><a href="#home">Home</a></li>
-                <li><a href="#vehicles">Vehicles</a></li>
-                <li><a href="#maintenance">Maintenance</a></li>
-            </ul>
-        </nav>
+        <div class="container">
+            <h1>AutoCare Log</h1>
+            <nav role="navigation" aria-label="Main navigation">
+                <ul>
+                    <li><a href="#home">Home</a></li>
+                    <li><a href="#vehicles">Vehicles</a></li>
+                    <li><a href="#maintenance">Maintenance</a></li>
+                </ul>
+            </nav>
+        </div>
     </header>
 
     <main role="main" aria-label="Main content">
-        <section id="home" aria-labelledby="welcome-heading">
-            <h2 id="welcome-heading">Welcome to AutoCare Log</h2>
-            <p>Track and manage your vehicle maintenance records with ease.</p>
-        </section>
+        <div class="container">
+            <section id="home" aria-labelledby="welcome-heading">
+                <h2 id="welcome-heading">Welcome to AutoCare Log</h2>
+                <p>Track and manage your vehicle maintenance records with ease.</p>
+            </section>
 
-        <section id="vehicles" aria-labelledby="vehicles-heading">
-            <h2 id="vehicles-heading">My Vehicles</h2>
-            <div id="vehicles-container" aria-live="polite" aria-atomic="true">
-                <!-- Vehicle list will be populated by JavaScript -->
-            </div>
-        </section>
+            <section id="vehicle-info" aria-labelledby="vehicle-info-heading">
+                <h2 id="vehicle-info-heading">Vehicle Information</h2>
+                <div id="vehicle-form-container" class="form-container">
+                    <!-- Vehicle form will be rendered here by JavaScript -->
+                </div>
+            </section>
 
-        <section id="maintenance" aria-labelledby="maintenance-heading">
-            <h2 id="maintenance-heading">Maintenance Records</h2>
-            <div id="maintenance-container" aria-live="polite" aria-atomic="true">
-                <!-- Maintenance records will be populated by JavaScript -->
-            </div>
-        </section>
+            <section id="vehicles" aria-labelledby="vehicles-heading">
+                <h2 id="vehicles-heading">My Vehicles</h2>
+                <div id="vehicles-container" aria-live="polite" aria-atomic="true">
+                    <!-- Vehicle list will be populated by JavaScript -->
+                </div>
+            </section>
+
+            <section id="maintenance" aria-labelledby="maintenance-heading">
+                <h2 id="maintenance-heading">Maintenance Records</h2>
+                <div id="maintenance-container" aria-live="polite" aria-atomic="true">
+                    <!-- Maintenance records will be populated by JavaScript -->
+                </div>
+            </section>
+        </div>
     </main>
 
     <footer role="contentinfo" aria-label="Site footer">
-        <p>&copy; 2026 AutoCare Log. All rights reserved.</p>
+        <div class="container">
+            <p>&copy; 2026 AutoCare Log. All rights reserved.</p>
+        </div>
     </footer>
 
     <script type="module" src="js/app.js"></script>
