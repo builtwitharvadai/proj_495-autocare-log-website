@@ -24,3 +24,6 @@ coverage/
 # Temporary files
 temp/
 tmp/
+
+# Claude CLI task files
+arvad_task_files/
